@@ -1,0 +1,43 @@
+
+## アカウントごとのアクセス権限。
+SELECT admin_pages.*, GROUP_CONCAT(admin_pages.access_type) FROM admin_pages 
+JOIN
+admin_role_pages
+ON
+admin_role_pages.admin_page_id = admin_pages.id
+WHERE admin_role_pages.admin_role_id = 1
+GROUP BY admin_pages.admin_menu_id
+
+SELECT admin_pages.*, GROUP_CONCAT(admin_pages.access_type) FROM admin_pages 
+JOIN
+admin_role_pages
+ON
+admin_role_pages.admin_page_id = admin_pages.id
+WHERE admin_role_pages.admin_role_id = 4
+GROUP BY admin_pages.admin_menu_id
+
+## アカウントごとのアクセスできるページ名。
+SELECT admin_pages.*, GROUP_CONCAT(admin_routes.route_name) FROM admin_pages 
+JOIN
+admin_routes
+ON
+admin_routes.admin_page_id = admin_pages.id
+JOIN
+admin_role_pages
+ON
+admin_role_pages.admin_page_id = admin_pages.id
+WHERE admin_role_pages.admin_role_id = 1
+GROUP BY admin_pages.admin_menu_id
+
+SELECT admin_pages.*, GROUP_CONCAT(admin_routes.route_name) FROM admin_pages 
+JOIN
+admin_routes
+ON
+admin_routes.admin_page_id = admin_pages.id
+JOIN
+admin_role_pages
+ON
+admin_role_pages.admin_page_id = admin_pages.id
+WHERE admin_role_pages.admin_role_id = 4
+GROUP BY admin_pages.admin_menu_id
+
